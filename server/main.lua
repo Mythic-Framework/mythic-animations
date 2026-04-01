@@ -7,6 +7,7 @@ function RetrieveComponents()
     Animations = exports['mythic-base']:FetchComponent('Animations')
     Middleware = exports['mythic-base']:FetchComponent('Middleware')
     Inventory = exports['mythic-base']:FetchComponent('Inventory')
+    Version = exports['mythic-base']:FetchComponent('Version')
     RegisterChatCommands()
 end
 
@@ -19,6 +20,7 @@ AddEventHandler('Core:Shared:Ready', function()
         'Animations',
         'Middleware',
         'Inventory',
+        'Version',
     }, function(error)
         if #error > 0 then return end -- Do something to handle if not all dependencies loaded
         RetrieveComponents()
@@ -26,6 +28,8 @@ AddEventHandler('Core:Shared:Ready', function()
         RegisterMiddleware()
 
         RegisterItems()
+
+        Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
     end)
 end)
 
